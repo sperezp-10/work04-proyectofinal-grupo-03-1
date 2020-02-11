@@ -24,4 +24,4 @@ esta seria la cantidad de bits que ocuparia la RAM, al compararla con la memoria
 ![lectura1](./figs/cod_3.PNG)
 
 En esta primera parte podemos apreciar los parametros hablados en la primera parte de este apartado, ademas de la imagen con la cual se inicializa la RAM, seguidamente tenemos iniciado los dos puertos de la memoria, en la primera parte tenemos el clock para escritura(PCLK de la camara) junto a un addres, un indicador para el dato a escribir y una señal que controla la escritura en la RAM, en la segunda parte de la seccion y de manera analoga tenemos los parametros para la lectura, es decir, un clock para delimitar el proceso de lectura de la RAM (se toma el de las pantallas VGA el cual es uno de una frecuancia de 25MHz), un addres y la informacion del bit a leer de la RAM.
-![lectura1](./figs/cod_3.1.PNG)
+![lectura1](./figs/cod_4.PNG)
