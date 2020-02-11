@@ -60,4 +60,25 @@ Se crearon 5 registros, dos son las señales de entrada y salida, uno la direcci
 * RWrite (registro de escritura)
 * count (inicializado con valor 0, indicará los datos que se deben tomar del bus de entrada)
 
+Antes de seguir con el codigo, se hace indispensable explicar el proceso de Downsampling el cual es muy importante para la captura de datos, para esto sabemos que  la cámara nos envía un bus de datos de 8 bits (1 Byte), con 2 Bytes tenemos la información de un pixel en formato RGB565 como se ilustra en la siguiente tabla.
+
+Byte 1  |  Byte 2
+----------------|---------------
+R R R R R G G G | G G G B B B B B
+0 1 2 3 4 5 6 7 | 0 1 2 3 4 5 6 7
+
+
+Para pasarlo a formato RGB332 se toman los datos más significativos de cada color. En el caso del primer Byte se dejaría de tomar los bits 3 y 4, mientras que en el caso del Byte 2 se toman los bits 3 y 4. Con el registro *count* se puede escoger que tipo de muestreo (sampling) se debe realizar, si el correspondiente al del primer Byte o al segundo Byte. De tal manera que nuestro dato de salida es 1 Byte por cada  2 Bytes de entrada.
+
+Byte 1  |  Byte 2
+----------------|---------------
+R R R R R G G G | G G G B B B B B
+0 1 2 X X 5 6 7 | X X X 3 4 X X X
+
+
+Cada vez que se muestree uno de los Bytes se debe sumar +1 a *count*, ya que este es quien determina que se debe hacer el siguiente muestreo. *count* puede ser 0 o 1. 
+
+Una vez explicado el proceso y sabiendo el marco que debe resolver el codigo, mostraremos la evolucion del mismo junto a los errores encontrados y corregidos, mostrando como fue que se llego al resultado final.
+
+
 
