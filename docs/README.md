@@ -95,8 +95,7 @@ Con este cambio, al realizar otra vez la simulacion obtenemos la siguiente image
 
 ![lectura1](./figs/prueba_4.png)
 
-
-
+Como se puede apreciar, la simulacion dio como debia, asi que el paso siguiente fue conectar la camara y una pantalla VGA para evaluar 
 
 
 
