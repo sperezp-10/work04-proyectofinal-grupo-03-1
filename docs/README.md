@@ -76,9 +76,18 @@ R R R R R G G G | G G G B B B B B
 0 1 2 X X 5 6 7 | X X X 3 4 X X X
 
 
-Cada vez que se muestree uno de los Bytes se debe sumar +1 a *count*, ya que este es quien determina que se debe hacer el siguiente muestreo. *count* puede ser 0 o 1. 
+Cada vez que se muestree uno de los Bytes se debe sumar +1 a *count*, ya que este es quien determina que se debe hacer el siguiente muestreo. *count* puede ser 0 o 1.  este proceso se presenta en el primer codigo de la siguiente manera:
 
-Una vez explicado el proceso y sabiendo el marco que debe resolver el codigo, mostraremos la evolucion del mismo junto a los errores encontrados y corregidos, mostrando como fue que se llego al resultado final.
+![CAPTURADATOS](./figs/codi1.PNG)
+
+En el primer codigo, tenemos en una primera parte un ciclo encargado de delimitar cuando realizar la captura de datos, esta en un principio se realiza cuando el valor de Vsync es 0, durante este tiempo se envia toda la informacion de la imagen, cada vez que se llega un nuevo bus de datos la direccion debe cambiar (Paddr=Paddr+1) y cuando se acabe de enviar todos los datos, debemos resetear el addres empleado para delimitar el pixel. esta seccion se muestra a continuacion.
+
+![CAPTURADATOS](./figs/Vsync.PNG)
+
+Al evaluar este codigo en el simulador VGA, sale la siguiente imagen
+
+
+
 
 
 
