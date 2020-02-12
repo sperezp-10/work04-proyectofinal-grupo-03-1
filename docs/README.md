@@ -91,11 +91,7 @@ Como evidenciamos perfectamente en la imagen, en la primera prueba el modulo de 
 
 ![lectura1](./figs/cod_2.png)
 
-Ademas de este cambio, tambien se altero el codigo de TB para la creacion de barras de colores de forma tal que podamos apreciar el tamaño de la ventana simulada, esta edicion se muestra a continuacion:
-
-![lectura1](./figs/cod_2_1.PNG)
- 
- Aca tenemos tres registrios nuevos, el primero es un contador para  emplear el cambio de color, en 
+Con este cambio, al realizar otra vez 
 
 
 
