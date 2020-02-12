@@ -84,7 +84,7 @@ En el primer codigo, tenemos en una primera parte un ciclo encargado de delimita
 
 ![CAPTURADATOS](./figs/Vsync.PNG)
 
-Al evaluar este codigo en el simulador VGA, sale la siguiente imagen
+Al evaluar este codigo en el simulador VGA, sale la siguiente imagen 
 
 
 
