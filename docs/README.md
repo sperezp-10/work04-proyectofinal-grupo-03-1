@@ -91,7 +91,10 @@ Como evidenciamos perfectamente en la imagen, en la primera prueba el modulo de 
 
 ![lectura1](./figs/cod_2.png)
 
-Con este cambio, al realizar otra vez 
+Con este cambio, al realizar otra vez la simulacion obtenemos la siguiente imagen:
+
+![lectura1](./figs/prueba_4.png)
+
 
 
 
