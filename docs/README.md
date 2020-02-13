@@ -97,7 +97,10 @@ Con este cambio, al realizar otra vez la simulacion, obtenemos la siguiente imag
 
 Como se puede apreciar, en este punto el resultado de la simulacion es la esperada en el planteamiento del Work03, una ves concordado eso, se procede a conectar la camara y una pantalla VGA para pasar a una prueba real de la captura de datos, despues de realizar el montaje se obtuvo el siguiente resultado:
 [![IMAGE ALT TEXT](./figs/vid_2.PNG)](https://youtu.be/BucJykuWWvo "Video Title")
-Como podemos apreciar, 
+
+Como podemos apreciar, se altera el color del fondo, cosa que indica que se esta realizando un guardado en la ultima posicion de memoria ademas de que la imagen en video se va corriendo, esto denota un problema en la sincronizacion, de aqui surge la pregunta de ¿por que funciona en la simulacion y no en la aplicacion real?, para responder esto, tenemos que abordar unos conceptos de como se realiza el proceso de captura de datos y describir un poco sobre la manera correcta de hacer este modulo.
+
+
 
 
 
