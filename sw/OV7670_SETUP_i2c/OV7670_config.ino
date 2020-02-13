@@ -26,53 +26,48 @@ void set_cam_RGB565_QCIF(){
   delay(100);
  
  OV7670_write(0x12, 0x0C);  //COM7: Set QCIF and RGB
- OV7670_write(0x11, 0xC0);       //CLKR: Set internal clock to use external clock
- OV7670_write(
-  0x0C, 0x08);       //COM3: Enable Scaler
- OV7670_write(0x3E, 0x00);
- OV7670_write(0x40,0xD0);      //COM15: Set RGB 565
+ OV7670_write(0x40,0xD0);   //COM15: Set RGB 565
+ OV7670_write(0x11, 0xC0);  //CLKR: Set internal clock to use external clock
+ OV7670_write(0x0C, 0x08);  //COM3: Enable Scaler
+ OV7670_write(0x3E, 0x00);  //COM14: Normal PCLK and scaling parameter cannot be adjusted manually. 
 
  //Color Bar
-//OV7670_write(0x42, 0x08); 
-//OV7670_write(0x12, 0x0E);
+//OV7670_write(0x42, 0x08);   //COM17: DSP color bar enable
+//OV7670_write(0x12, 0x0E);   //COM7: Enable color bar, Output format QCIF and RGB selection
 
 
  //Registros Mágicos 
-OV7670_write(0x3A,0x04);
+ OV7670_write(0x3A,0x04);   //TSLB: Line buffer test option: output sequence
 
- OV7670_write(0x14,0x18); // control de ganancia 
+ OV7670_write(0x14,0x18);   //COM9: Automatic Gain Ceiling - maximum AGC value 4x 
 
- OV7670_write(0x4F,0xB3);  //abajo
- OV7670_write(0x50,0xB3);  //abaajo
- OV7670_write(0x51,0x00);  //abajo
- OV7670_write(0x52,0x3D);  //abajo
- OV7670_write(0x53,0xA7);  // abajo
- OV7670_write(0x54,0xE4);  //abajo
- OV7670_write(0x58,0x9E);   //abajo
- OV7670_write(0x3D,0xC0);   
+ OV7670_write(0x4F,0xB3);   //MTX1: Matrix Coefficient 1
+ OV7670_write(0x50,0xB3);   //MTX2: Matrix Coefficient 2
+ OV7670_write(0x51,0x00);   //MTX3: Matrix Coefficient 3
+ OV7670_write(0x52,0x3D);   //MTX4: Matrix Coefficient 4
+ OV7670_write(0x53,0xA7);   //MTX5: Matrix Coefficient 5
+ OV7670_write(0x54,0xE4);   //MTX6: Matrix Coefficient 6
+ OV7670_write(0x58,0x9E);   //MTXS: Register contras-center is updated automatically and matrix coefficient sign
+ OV7670_write(0x3D,0xC0);   //COM13: UV saturation level-UV auto adjustment and Gamma enable
  
 
- OV7670_write(0x17,0x14);  //cambia hstart
- OV7670_write(0x18,0x02);  // cambia hstop
- OV7670_write(0x32,0x80);  // href deja el valor qye  viene por default
- OV7670_write(0x19,0x03);  // vref start
- OV7670_write(0x1A,0x7B);  // vref stop
- OV7670_write(0x03,0x0A);  // cambia vref
-
- 
- OV7670_write(0x0F,0x41);   // no hace nada 
- OV7670_write(0x32,0x80);   // ya lo habias configurado
- OV7670_write(0x1E,0x00);   // no hace nada 
- OV7670_write(0x33,0x0B);  //
- OV7670_write(0x3C,0x78);  // no hace nada y es para  usar vsync
+ OV7670_write(0x17,0x14);   //HSTART: cambia hstart
+ OV7670_write(0x18,0x02);   //HSTOP: cambia hstop
+ OV7670_write(0x32,0x80);   //HREF: href deja el valor qye  viene por default
+ OV7670_write(0x19,0x03);   //VSTRT: vref start
+ OV7670_write(0x1A,0x7B);   //VSTOP: vref stop
+ OV7670_write(0x03,0x0A);   //VREF: cambia vref
+ OV7670_write(0x0F,0x41);   //COM6: Disable HREF at optical black
+ OV7670_write(0x1E,0x00);   //MVFP: no hace nada 
+ OV7670_write(0x33,0x0B);   //CHLF: Reserved
+ OV7670_write(0x3C,0x78);   //COM12:  no hace nada y es para  usar vsync
  OV7670_write(0x69,0x00);   // abajo
- OV7670_write(0x74,0x00);   /// esta por defecto el valor 
- OV7670_write(0xB0,0x84);   // configura  abajo
- OV7670_write(0xB1,0x0C);  
- OV7670_write(0xB2, 0x0E);
- OV7670_write(0xB3,0x80);    
+ OV7670_write(0x74,0x00);   // esta por defecto el valor 
+ OV7670_write(0xB0,0x84);   //RSVD: Reserved
+ OV7670_write(0xB1,0x0C);   //ABLC1: Enable ABLC function
+ OV7670_write(0xB2, 0x0E);  //RSVD: Reserved
+ OV7670_write(0xB3,0x80);   //THL_DLT: ABLC target
  
-
 
 /*prubas de ferney*/
 /*
@@ -85,6 +80,7 @@ OV7670_write(0x3A,0x04);
   OV7670_write(0x17, 0x16);      
   OV7670_write(0x18, 0x04);     
 */
+
 }
 
 void get_cam_register(){

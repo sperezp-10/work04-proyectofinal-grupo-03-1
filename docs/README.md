@@ -96,8 +96,155 @@ Con este cambio, al realizar otra vez la simulacion, obtenemos la siguiente imag
 ![lectura1](./figs/prueba_4.PNG)
 
 Como se puede apreciar, en este punto el resultado de la simulacion es la esperada en el planteamiento del Work03, una ves concordado eso, se procede a conectar la camara y una pantalla VGA para pasar a una prueba real de la captura de datos, despues de realizar el montaje se obtuvo el siguiente resultado:
+
 ![lectura1](./figs/vid_1.PNG)
 
+
+
+
+#Arduino.
+
+Con ayuda de arduino se realiza la configuración de la cámara a través de comunicación I2C, la librería que nos permite este tipo de comunicación es la Wire.h. A continuación, se explica el funcionamiento del código de arduino.
+
+Como ya se ha dicho es importante llamar o incluir la librería Wire.h, debido a que con esta se realiza la comunicación I2C. Efectivamente, como se logra apreciar en la siguiente figura, lo primero que hacemos es incluir la librería y definimos una constante que almacena la dirección I2C de la cámara. Lo siguiente es la definición del Setup, el setup es muy importante pues allí se inicializan variables y funciones; está parte del codigo es muy importante y solo se ejecuta una vez o al menos hasta que se haga reset. La primera línea del setup inicializa la librería Wire y debido a que no se le asigna una dirección el arduino se une al bus I2C como Master, después se configura la velocidad de transmisión de datos serial (9600 bits/s) y posteriormente se debe mostrar en el Monitor Serie el texto "prueba estado actual".
+
+![lectura1](./figs/Setup.PNG)
+
+Posteriormente, se llaman a tres funciones las cuales se definen más adelante en el código. A grandes rasgos, con estas funciones preguntamos a la OV7670 por los registros o configuración actual, después se editan los registros o configuración de acuerdo a la datasheet y las especificaiones que se han definido a lo largo del proyecto. Luego de una pausa de 100 ciclos, nuevamente se muestra un texto en el Monitor Serie ("Despues de config") y volvemos a preguntar por los registros que tiene la cámara. En las imagenes siguiente se puede apreciar que la configuración cargada a la cámara es la misma que ya tenía, es decir, los registros que nos muestra antes de la configuración y después de esta son los mismos.
+
+![lectura1](./figs/Acconfig.PNG)
+
+![lectura1](./figs/Afconfig.PNG)
+
+##set_cam_RGB565_QCIF()
+
+Está función es la que nos permite configurar la cámara pues es está la que edita los registros. Primero se configura el registro 0x12 o COM7 con la entrada 0x80, la cual nos permite reiniciar todos los registros a sus valores por defecto. Después tenemos un delay  y empezamos a realizar las configuraciones, para COM7 y COM15 asignamos 0x0C y 0xD0, respectivamente, con el fin de tener una salida de pixeles en formato QCIF y RGB 565. El registro CLKRC con el valor 0x0C para usar reloj externo a la cámara, COM3 y COM14 con 0x08 y 0x00 habilitan el escalado (automatico de acuerdo al formato seleccionado en COM7[5:3]) y no se escala el PCLK. Estas configuraciones son las principales, sin embargo, hay otras que son necesarias para que la cámara funcione. A continuación se describe más detalladamente los valores para cada uno de los registros antes mencionados.
+
+###Dirección:0x12 y Registro:COM7
+
+Bit | Valor | Descripción
+------------ | ------------- | ------------
+7 | 0 | SCCB Reestablecer Registros
+6 | 0 | Reservado
+5 | 0 | Formato de salida - Selección CIF
+4 | 0 | Formato de salida - Selección CVGA
+3 | 1 | Formato de salida - Selección QCIF
+2 | 1 | Formato de salida - Selección RGB
+1 | 0 | Barra de color
+0 | 0 | Formato de salida - Row RGB
+
+
+###Dirección:0x40 y Registro:COM15
+
+Bits | Valor | Descripción
+------------ | ------------- | ------------
+[7:6] | 11 | Formaro de datos - Rango de salida : [00] a [FF]
+[5:4] | 01 | RGB 565
+[3:0] | 0000 | Reservado
+
+
+###Dirección:0x11 y Registro:CLKR
+
+Bits | Valor | Descripción
+------------ | ------------- | ------------
+7 | 1 | Reservado
+6 | 1 | Usar reloj externo directamente
+[5:0] | 000000 | Pre-escalado del reloj interno
+
+
+###Dirección:0x0C y Registro:COM3
+
+Bits | Valor | Descripción
+------------ | ------------- | ------------
+7 | 0 | Reservado
+6 | 0 | Intercambio de datos de salida MSB y LSB
+5 | 0 | Opción tri-estado para el reloj de salida en el periodo de apagado
+4 | 0 | Opción tri-estado para datos de salida en el periodo de apagado
+3 | 1 | Habilitar escalado
+2 | 0 | Habilitar DCW
+[1:0] | 00 | Reservado
+
+
+###Dirección:0x3E y Registro:COM14
+
+Bits | Valor | Descripción
+------------ | ------------- | ------------
+[7:5] | 0 | Reservado
+4 | 0 | Habilitar DCW y escalado de PCLK
+3 | 0 | Habilitar escalado manual para modos de resolución pre-definidos como CIF, QCIF y QVGA
+[2:0] | 000 | Divisor de PCLK
+
+
+Después de estas configuraciones tenemos dos líneas de código comentadas, estan se usan para realizar el test de la barra de colores. Sí por ejemplo la imagen que vemos en pantalla al integrar la camara y la FPGA no es coherente, podemos usar está prueba con el fin de verificar que se está haciendo bien la toma de datos o si la cámara no funciona adecuamente.
+
+![lectura1](./figs/Config.PNG)
+
+
+###Configuración para test de barra de colores
+
+####Dirección:0x12 y Registro:COM7
+
+Bit | Valor | Descripción
+------------ | ------------- | ------------
+7 | 0 | SCCB Reestablecer Registros
+6 | 0 | Reservado
+5 | 0 | Formato de salida - Selección CIF
+4 | 0 | Formato de salida - Selección CVGA
+3 | 1 | Formato de salida - Selección QCIF
+2 | 1 | Formato de salida - Selección RGB
+1 | 1 | Barra de color
+0 | 0 | Formato de salida - Row RGB
+
+
+
+####Dirección:0x42 y Registro:COM17
+
+Bits | Valor | Descripción
+------------ | ------------- | ------------
+[7:6] | 0 | AEC : Control de exposición automatica
+[5:4] | 0 | Reservado
+3 | 1 | DSP Barra de colores habilitada
+[2:0] | 0 | Reservado
+
+
+##get_cam_register()
+
+Está función nos permite ver en el Monitor Serie la configuración de algunos registros, en orden los registros son:
+
+* COM7
+* CLKRC
+* COM3
+* COM14
+* COM15
+* TSLB
+* COM9
+* HSTART
+* HSTOP
+* HREF
+* VSTOP
+* VREF
+* COM6
+* MVFP
+* CHLF
+* COM12
+* GFIX
+* RSVD
+
+##OV7670_write(int reg_addr, byte data)
+
+Está función llama a la función I2C_write(int start, const byte *pData, int size) con el fin de realizar las configuraciones; esta función es llamada por set_cam_RGB565_QCIF() y set_color_matrix()
+
+##I2C_write(int start, const byte *pData, int size)
+
+Está función es la que se comunica directamente con la cámara a través de I2C y realiza las configuraciones con los datos de entrada, cuando realiza correctamente las configuraciones escribe un "WRITE OK" n el Monitor Serie.
+
+##get_register_value(int reg_addr)
+
+Está es otra función que se comunica directamente con la cámara por el bus I2C, nos retorna el valor que ha sido configurado en un registro de acuerdo al address que recibe.
+
+##set_color_matrix()
+
+Está matriz nos configura la matrix de colores de la cámara y algunas propiedad como el brillo y el contraste.
 
 
 
