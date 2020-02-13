@@ -106,7 +106,7 @@ Como podemos apreciar en la anterior imagen, enfocandonos en la relacion de los 
 
 ![lectura1](./figs/cam_read_FSM.png)
 
-
+Este es el diagrama final del mismo, aca podemos apreciar 4 estados, en el caso s0 se tiene que primero el boton no debe estar actuando, es decir, pic=0, en este estado se tiene otra condicion y es que no debe haber un flanco de bajada de Vsync, ya que esto indicaria que empieza el proceso para capturar imagen, en este estado lo que se hace es asignar el addres a la ultima posicion posible, de tal forma que al iniciar el proceso de captura de datos (cuando hay un flanco de bajada en Vsync), el pizel pueda ser almacenado desde la primera posicion posible. Una vez exista un flanco de bajada de Vsync, entramos al segundo estado (S1) en este estado se realiza una clase de espera para evitar coger datos invalidos, como los encontrados en el el intervalo desde el flanco de bajada en el Vsync y el flanco de subida de Href, este estado es el que evita el problema visto anteriormente, este estado asigna el write a 0 para q no escriba; esto lo hara hasta que el valor de href sea 1 o exista un flanco de subida de Vsync, este ultimo caso se da cuando se acaba de capturar la imagen. Cuando Href es 1, primeramente realizamos el guardado del primer Byte de informacion para posteriormente, pasar al siguiente estado. En S3 tenemos el guardado del siguiente Byte, cabe aclarar que el estado S1 y S3 son los encargados de realizar el proceso de downsampling, en S3 entonces se acaba como tal el proceso y se realiza la escritura en la memoria. Una vez realizado esto se evalua el estado actual de Href, si este ya no es 1, (es decir hay una bajada) indica que se acabo de tomar la informacion de la fila conserniente, por lo que se devuelve a S1 para evaluar si ya se termino la imagen completamente o simplemnte ocurrira un salto de linea. En el caso en que se tenga que Href sigue valiendo uno, pasamos al ultimo estado el cual es nombrado S2
 Con esto en mente, tenemos el siguiente cambio en el codigo de lectura de la camara:
 ![lectura1](./figs/cod_5.PNG)
 ![lectura1](./figs/cod_5_2.PNG)
@@ -135,37 +135,6 @@ Aunque el boton funciona y el resto se encuentra ya funcionando desde hace mucho
 ![lectura1](./figs/cod_8_2.PNG)
 ![lectura1](./figs/cod_8_3.PNG)
 
-## Modulo cam_read
-
-A continuación se encuentra el diagrama estructural y el diagrama de flujo del modulo cam_read.v
-
-![lectura1](./figs/Ecam_read.png)
-
-![lectura1](./figs/DiagFlujo.png)
-
-## Modulo buffer_ram_dp
-
-A continuación se encuentra el diagrama estructural del modulo buffer_ram_dp.v
-
-![lectura1](./figs/Ebufferram.png)
-
-## Modulo test_cam
-
-A continuación se encuentra el diagrama estructural del modulo test_cam.v
-
-![lectura1](./figs/Etest_cam.png)
-
-## Modulo VGA_Driver640x480
-
-A continuación se encuentra el diagrama estructural del modulo VGA_Driver640z480.v
-
-![lectura1](./figs/EVGA.png)
-
-## Modulo clk25_24_nexys4
-
-A continuación se encuentra el diagrama estructural del modulo clk25_24_nexys4.v
-
-![lectura1](./figs/ECLK.png)
 
 
 
@@ -273,11 +242,9 @@ Bits | Valor | Descripción
 3 | 1 | DSP Barra de colores habilitada
 [2:0] | 0 | Reservado
 
-La barra de colores debe verse de la siguiente forma:
 
-![lectura1](./figs/ColorBar.jpg)
 
-A continuación, con los registros COM13 y TSLB se configura la secuencia de salida y el ajuste automatico del nivel de saturación UV. También tenemos registros para la matrix de imagen, la ganancia de los canales, configuraciones de Vsync y Href, etc.
+
 
 ![lectura1](./figs/Config1.PNG)
 ![lectura1](./figs/Config2.PNG)
@@ -321,6 +288,8 @@ Está función llama a la función I2C_write(int start, const byte *pData, int s
 Está función es la que se comunica directamente con la cámara a través de I2C y realiza las configuraciones con los datos de entrada, cuando realiza correctamente las configuraciones escribe un "WRITE OK" n el Monitor Serie.
 
 ![lectura1](./figs/I2Cwrite.PNG)
+![lectura1](./figs/I2Cwrite1.PNG)
+
 
 ## get_register_value(int reg_addr)
 
