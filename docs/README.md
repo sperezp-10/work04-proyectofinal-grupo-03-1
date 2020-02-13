@@ -96,11 +96,7 @@ Con este cambio, al realizar otra vez la simulacion, obtenemos la siguiente imag
 ![lectura1](./figs/prueba_4.PNG)
 
 Como se puede apreciar, en este punto el resultado de la simulacion es la esperada en el planteamiento del Work03, una ves concordado eso, se procede a conectar la camara y una pantalla VGA para pasar a una prueba real de la captura de datos, despues de realizar el montaje se obtuvo el siguiente resultado:
-<figure class="video_container">
-  <video controls="true" allowfullscreen="true" poster="./figs/vid_1.PNG" >
-    <source src="./figs/vid_1.mp4" type="video/mp4">
-  </video>
-</figure>
+![lectura1](./figs/vid_1.mp4)
 
 
 
