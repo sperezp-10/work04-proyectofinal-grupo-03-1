@@ -138,24 +138,25 @@ Aunque el boton funciona y el resto se encuentra ya funcionando desde hace mucho
 
 ## Modulo cam_read
 
-![lectura1](./figs/Ecam_read.PNG)
+![lectura1](./figs/Ecam_read.png)
 
 ![lectura1](./figs/DiagFlujo.png)
 
 ## Modulo buffer_ram_dp
 
-![lectura1](./figs/Ebufferram.PNG)
+![lectura1](./figs/Ebufferram.png)
 
 ## Modulo test_cam
-![lectura1](./figs/Etest_cam.PNG)
+
+![lectura1](./figs/Etest_cam.png)
 
 ## Modulo VGA_Driver640x480
 
-![lectura1](./figs/EVGA.PNG)
+![lectura1](./figs/EVGA.png)
 
 ## Modulo clk25_24_nexys4
 
-![lectura1](./figsECLK.PNG)
+![lectura1](./figs/ECLK.png)
 
 
 
