@@ -96,8 +96,44 @@ Con este cambio, al realizar otra vez la simulacion, obtenemos la siguiente imag
 ![lectura1](./figs/prueba_4.PNG)
 
 Como se puede apreciar, en este punto el resultado de la simulacion es la esperada en el planteamiento del Work03, una ves concordado eso, se procede a conectar la camara y una pantalla VGA para pasar a una prueba real de la captura de datos, despues de realizar el montaje se obtuvo el siguiente resultado:
+[![IMAGE ALT TEXT](./figs/vid_2.PNG)](https://youtu.be/BucJykuWWvo "Video Title")
 
-![lectura1](./figs/vid_1.PNG)
+Como podemos apreciar, se altera el color del fondo, cosa que indica que se esta realizando un guardado en la ultima posicion de memoria ademas de que la imagen en video se va corriendo, esto denota un problema en la sincronizacion, de aqui surge la pregunta de ¿por que funciona en la simulacion y no en la aplicacion real?, para responder esto, tenemos que abordar unos conceptos de como se realiza el proceso de captura de datos y describir un poco sobre la manera correcta de hacer este modulo.
+
+![lectura1](./figs/cajacapturadatos2.PNG)
+
+Como podemos apreciar en la anterior imagen, enfocandonos en la relacion de los distintos clocks, comprendemos la razon por la que el codigo que se implemento hasta este punto esta mal. Vemos que el hecho de que Vsync este en 0 no es lo unico  para comenzar a tomar datos y por consiguiente alterar el addres del pixel, observamos siempre un delay importante entre el Vsync y el Href, este delay es el tiempo necesario para la camara enviar el dato correcto en la fila correcta, y aunque a primera instancia pareciera cumplirse esto en el downsampling, vemos que no lo hace en la seccion que altera el addres del pixel, esta parte es la que hace que la imagen se corra. Otra cosa a mejorar en el codigo es el manejo de los casos presentes a lo hora de tomar en cuenta la captura de datos, por consiguiente y por facilidad de agregar la opcion del boton, ademas de brindar versatilidad al codigo, se empleo una maquina de estados la cual se muestra a continuacion:
+
+![lectura1](./figs/cam_read_FSM.png)
+
+
+Con esto en mente, tenemos el siguiente cambio en el codigo de lectura de la camara:
+![lectura1](./figs/cod_5.PNG)
+![lectura1](./figs/cod_5_2.PNG)
+
+Como se puede apreciar, aun no se tiene implementado el boton para realizar la fotografia, esto se debe a la necesidad de primero mejorar la imagen como tal para poder mejorar la captura primero. Este codigo genero la siguiente respuesta:
+[![IMAGE ALT TEXT](./figs/vid_3.PNG)](https://youtu.be/j4-9xzhbrv8 "Video Title")
+
+Aca podemos apreciar que aunque la imagen como tal este bien y ya no se desplace, vemos comos los colores no cuadran con la realidad, ademas de presentar un color de fondo que no deberia de ser, esto da a entender que existe un problema con la captura de datos, ya que de cierta manera los colores dados no corresponden y se guarda informacion en posiciones que deberian ser reservadas, al ver estos errores se decidio implementar el boton para completar el esquema y aterar las condiciones de cada uno de los casos, ademas de agregar contadores para los Href y pixels de tal forma que se pueda hacer un seguimiento mas detallado a los datos que se almacenan y a las decisiones tomadas en cada uno de los estados, asi, el codigo corregido en este aspecto queda de la siguiente manera:
+![lectura1](./figs/cod_6.PNG)
+![lectura1](./figs/cod_6_2.PNG)
+![lectura1](./figs/cod_6_3.PNG)
+Este codigo ya contempla mas la maquina de estados mostrada anteriormente (la cual es la maquina final del codigo) y soluciona los problemas condicionales ademas de mostrar el boton como parte de todo el codigo, pero al probarlo se puede apreciar una pequeña particularidad que se constrasta en el vide presentado a continuacion; en dicho video se logra ver como la imagen en la parte izquierda aparece partida completamente, dividiendo la imagen, esto claramente es muestra de que los pixeles no estan siendo guardados correctamente, sin embargo el problema del fondo y los colores fue arreglado, la imagen oscura es debido a la configuracion de brillo en el arduino:
+[![IMAGE ALT TEXT](./figs/vid_4.PNG)](https://youtu.be/_lfShGNMXzI "Video Title")
+
+Para intentar corregir este error se realizaron ciertos cambios en el codigo, estos genera el codigo mostrado a continuacion:
+
+![lectura1](./figs/cod_7.PNG)
+![lectura1](./figs/cod_7_2.PNG)
+![lectura1](./figs/cod_7_3.PNG)
+
+Pero lejos de arreglarlo, solo genera un corrimiento diagonal, ya que aumenta el desvio de la linea negra, haciendo mas evidente que se cuentan menos pixeles por fila como se evidencia a continuacion.
+![lectura1](./figs/vid_5.PNG)
+
+Aunque el boton funciona y el resto se encuentra ya funcionando desde hace mucho (la implementacion del boton en el codigo) buscamos terminar de optimizar el codigo y ver como solucionar el problema de la linea, el codigo final que logro concluir todo esto fue el siguiente:
+![lectura1](./figs/cod_8.PNG)
+![lectura1](./figs/cod_8_2.PNG)
+![lectura1](./figs/cod_8_3.PNG)
 
 
 
@@ -244,7 +280,7 @@ Está es otra función que se comunica directamente con la cámara por el bus I2
 
 ##set_color_matrix()
 
-Está matriz nos configura la matrix de colores de la cámara y algunas propiedad como el brillo y el contraste.
+Está función nos configura la matrix de colores de la cámara y algunas propiedad como el brillo y el contraste.
 
 
 
