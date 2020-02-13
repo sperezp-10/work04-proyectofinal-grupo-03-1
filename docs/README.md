@@ -136,6 +136,27 @@ Aunque el boton funciona y el resto se encuentra ya funcionando desde hace mucho
 ![lectura1](./figs/cod_8_3.PNG)
 
 
+## Modulo cam_read
+
+![lectura1](./figs/Ecam_read.PNG)
+
+![lectura1](./figs/DiagFlujo.png)
+
+## Modulo buffer_ram_dp
+
+![lectura1](./figs/Ebufferram.PNG)
+
+## Modulo test_cam
+![lectura1](./figs/Etest_cam.PNG)
+
+## Modulo VGA_Driver640x480
+
+![lectura1](./figs/EVGA.PNG)
+
+## Modulo clk25_24_nexys4
+
+![lectura1](./figsECLK.PNG)
+
 
 
 # Arduino.
@@ -242,7 +263,9 @@ Bits | Valor | Descripción
 3 | 1 | DSP Barra de colores habilitada
 [2:0] | 0 | Reservado
 
+La barra de colores debe verse de la siguiente forma:
 
+![lectura1](./figs/ColorBar.jpg)
 
 
 
@@ -288,8 +311,6 @@ Está función llama a la función I2C_write(int start, const byte *pData, int s
 Está función es la que se comunica directamente con la cámara a través de I2C y realiza las configuraciones con los datos de entrada, cuando realiza correctamente las configuraciones escribe un "WRITE OK" n el Monitor Serie.
 
 ![lectura1](./figs/I2Cwrite.PNG)
-![lectura1](./figs/I2Cwrite1.PNG)
-
 
 ## get_register_value(int reg_addr)
 
