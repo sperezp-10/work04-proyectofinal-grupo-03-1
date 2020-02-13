@@ -111,4 +111,26 @@ Con esto en mente, tenemos el siguiente cambio en el codigo de lectura de la cam
 ![lectura1](./figs/cod_5.PNG)
 ![lectura1](./figs/cod_5_2.PNG)
 
+Como se puede apreciar, aun no se tiene implementado el boton para realizar la fotografia, esto se debe a la necesidad de primero mejorar la imagen como tal para poder mejorar la captura primero. Este codigo genero la siguiente respuesta:
+[![IMAGE ALT TEXT](./figs/vid_3.PNG)](https://youtu.be/j4-9xzhbrv8 "Video Title")
 
+Aca podemos apreciar que aunque la imagen como tal este bien y ya no se desplace, vemos comos los colores no cuadran con la realidad, ademas de presentar un color de fondo que no deberia de ser, esto da a entender que existe un problema con la captura de datos, ya que de cierta manera los colores dados no corresponden y se guarda informacion en posiciones que deberian ser reservadas, al ver estos errores se decidio implementar el boton para completar el esquema y aterar las condiciones de cada uno de los casos, ademas de agregar contadores para los Href y pixels de tal forma que se pueda hacer un seguimiento mas detallado a los datos que se almacenan y a las decisiones tomadas en cada uno de los estados, asi, el codigo corregido en este aspecto queda de la siguiente manera:
+![lectura1](./figs/cod_6.PNG)
+![lectura1](./figs/cod_6_2.PNG)
+![lectura1](./figs/cod_6_3.PNG)
+Este codigo ya contempla mas la maquina de estados mostrada anteriormente (la cual es la maquina final del codigo) y soluciona los problemas condicionales ademas de mostrar el boton como parte de todo el codigo, pero al probarlo se puede apreciar una pequeña particularidad que se constrasta en el vide presentado a continuacion; en dicho video se logra ver como la imagen en la parte izquierda aparece partida completamente, dividiendo la imagen, esto claramente es muestra de que los pixeles no estan siendo guardados correctamente, sin embargo el problema del fondo y los colores fue arreglado, la imagen oscura es debido a la configuracion de brillo en el arduino:
+[![IMAGE ALT TEXT](./figs/vid_4.PNG)](https://youtu.be/_lfShGNMXzI "Video Title")
+
+Para intentar corregir este error se realizaron ciertos cambios en el codigo, estos genera el codigo mostrado a continuacion:
+
+![lectura1](./figs/cod_7.PNG)
+![lectura1](./figs/cod_7_2.PNG)
+![lectura1](./figs/cod_7_3.PNG)
+
+Pero lejos de arreglarlo, solo genera un corrimiento diagonal, ya que aumenta el desvio de la linea negra, haciendo mas evidente que se cuentan menos pixeles por fila como se evidencia a continuacion.
+![lectura1](./figs/vid_5.PNG)
+
+Aunque el boton funciona y el resto se encuentra ya funcionando desde hace mucho (la implementacion del boton en el codigo) buscamos terminar de optimizar el codigo y ver como solucionar el problema de la linea, el codigo final que logro concluir todo esto fue el siguiente:
+![lectura1](./figs/cod_8.PNG)
+![lectura1](./figs/cod_8_2.PNG)
+![lectura1](./figs/cod_8_3.PNG)
