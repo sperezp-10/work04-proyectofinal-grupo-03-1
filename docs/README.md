@@ -100,8 +100,10 @@ Como se puede apreciar, en este punto el resultado de la simulacion es la espera
 
 Como podemos apreciar, se altera el color del fondo, cosa que indica que se esta realizando un guardado en la ultima posicion de memoria ademas de que la imagen en video se va corriendo, esto denota un problema en la sincronizacion, de aqui surge la pregunta de ¿por que funciona en la simulacion y no en la aplicacion real?, para responder esto, tenemos que abordar unos conceptos de como se realiza el proceso de captura de datos y describir un poco sobre la manera correcta de hacer este modulo.
 
+![lectura1](./figs/cajacapturadatos2.PNG)
 
+Como podemos apreciar en la anterior imagen, enfocandonos en la relacion de los distintos clocks, comprendemos la razon por la que el codigo que se implemento hasta este punto esta mal. Vemos que el hecho de que Vsync este en 0 no es lo unico  para comenzar a tomar datos y por consiguiente alterar el addres del pixel, observamos siempre un delay importante entre el Vsync y el Href, este delay es el tiempo necesario para la camara enviar el dato correcto en la fila correcta, y aunque a primera instancia pareciera cumplirse esto en el downsampling, vemos que no lo hace en la seccion que altera el addres del pixel, esta parte es la que hace que la imagen se corra. Otra cosa a mejorar en el codigo es el manejo de los casos presentes a lo hora de tomar en cuenta la captura de datos, por consiguiente y por facilidad de agregar la opcion del boton, ademas de brindar versatilidad al codigo, se empleo una maquina de estados la cual se muestra a continuacion:
 
-
+![lectura1](./figs/cam read FSM.png)
 
 
