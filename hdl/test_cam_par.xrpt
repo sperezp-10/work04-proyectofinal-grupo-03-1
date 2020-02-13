@@ -5,7 +5,7 @@
     The structure and the elements are likely to change over the next few releases.
     This means code written to parse this file will need to be revisited each subsequent release.-->
 
-  <application stringID="par" timeStamp="Wed Feb 12 14:48:16 2020">
+  <application stringID="par" timeStamp="Thu Feb 13 12:28:39 2020">
     <section stringID="User_Env">
       <table stringID="User_EnvVar">
         <column stringID="variable"/>
@@ -33,7 +33,7 @@
         <column stringID="speed"/>
         <row stringID="row" value="0">
           <item stringID="arch" value="Intel(R) Celeron(R) CPU  N2840  @ 2.16GHz"/>
-          <item stringID="speed" value="1960.710 MHz"/>
+          <item stringID="speed" value="1332.140 MHz"/>
         </row>
       </table>
     </section>
@@ -47,12 +47,12 @@
     </task>
     <task stringID="PAR_PAR">
       <section stringID="PAR_DESIGN_SUMMARY">
-        <item stringID="PAR_REAL_TIME_COMPLETION_ROUTER" value="52 secs "/>
-        <item stringID="PAR_CPU_TIME_COMPLETION_ROUTER" value="52 secs "/>
+        <item stringID="PAR_REAL_TIME_COMPLETION_ROUTER" value="57 secs "/>
+        <item stringID="PAR_CPU_TIME_COMPLETION_ROUTER" value="54 secs "/>
         <item dataType="int" stringID="PAR_UNROUTES" value="0"/>
         <item dataType="float" stringID="PAR_TIMING_SCORE" value="0.000000"/>
-        <item stringID="PAR_REAL_TIME_COMPLETION_PAR" value="53 secs "/>
-        <item stringID="PAR_CPU_TIME_COMPLETION_PAR" value="53 secs "/>
+        <item stringID="PAR_REAL_TIME_COMPLETION_PAR" value="59 secs "/>
+        <item stringID="PAR_CPU_TIME_COMPLETION_PAR" value="55 secs "/>
       </section>
     </task>
     <task stringID="PAR_par">
@@ -2405,7 +2405,7 @@
     </task>
   </application>
 
-  <application stringID="Par" timeStamp="Wed Feb 12 14:48:18 2020">
+  <application stringID="Par" timeStamp="Thu Feb 13 12:28:41 2020">
     <section stringID="User_Env">
       <table stringID="User_EnvVar">
         <column stringID="variable"/>
@@ -2433,7 +2433,7 @@
         <column stringID="speed"/>
         <row stringID="row" value="0">
           <item stringID="arch" value="Intel(R) Celeron(R) CPU  N2840  @ 2.16GHz"/>
-          <item stringID="speed" value="1869.149 MHz"/>
+          <item stringID="speed" value="1760.835 MHz"/>
         </row>
       </table>
     </section>

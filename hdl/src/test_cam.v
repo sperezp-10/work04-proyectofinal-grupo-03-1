@@ -35,8 +35,8 @@ module test_cam(
 	output wire CAM_xclk,		// System  clock imput
 	output wire CAM_pwdn,		// power down mode 
 	output wire CAM_reset,		// clear all registers of cam
-	output wire [7:0] row,
-	output wire [7:0] pixel,
+	output wire [7:0] row,		// contador de filas
+	output wire [7:0] pixel,	// contador de pixels
 	
 	
 	// colocar aqui las entras  y salidas de la camara  que hace falta
