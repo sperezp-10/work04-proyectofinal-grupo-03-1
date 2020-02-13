@@ -135,8 +135,9 @@ Aunque el boton funciona y el resto se encuentra ya funcionando desde hace mucho
 ![lectura1](./figs/cod_8_2.PNG)
 ![lectura1](./figs/cod_8_3.PNG)
 
-
 ## Modulo cam_read
+
+A continuación se encuentra el diagrama estructural y el diagrama de flujo del modulo cam_read.v
 
 ![lectura1](./figs/Ecam_read.png)
 
@@ -144,17 +145,25 @@ Aunque el boton funciona y el resto se encuentra ya funcionando desde hace mucho
 
 ## Modulo buffer_ram_dp
 
+A continuación se encuentra el diagrama estructural del modulo buffer_ram_dp.v
+
 ![lectura1](./figs/Ebufferram.png)
 
 ## Modulo test_cam
+
+A continuación se encuentra el diagrama estructural del modulo test_cam.v
 
 ![lectura1](./figs/Etest_cam.png)
 
 ## Modulo VGA_Driver640x480
 
+A continuación se encuentra el diagrama estructural del modulo VGA_Driver640z480.v
+
 ![lectura1](./figs/EVGA.png)
 
 ## Modulo clk25_24_nexys4
+
+A continuación se encuentra el diagrama estructural del modulo clk25_24_nexys4.v
 
 ![lectura1](./figs/ECLK.png)
 
@@ -268,7 +277,7 @@ La barra de colores debe verse de la siguiente forma:
 
 ![lectura1](./figs/ColorBar.jpg)
 
-
+A continuación, con los registros COM13 y TSLB se configura la secuencia de salida y el ajuste automatico del nivel de saturación UV. También tenemos registros para la matrix de imagen, la ganancia de los canales, configuraciones de Vsync y Href, etc.
 
 ![lectura1](./figs/Config1.PNG)
 ![lectura1](./figs/Config2.PNG)
