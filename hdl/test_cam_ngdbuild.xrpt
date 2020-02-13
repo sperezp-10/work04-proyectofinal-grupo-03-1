@@ -5,7 +5,7 @@
     The structure and the elements are likely to change over the next few releases.
     This means code written to parse this file will need to be revisited each subsequent release.-->
 
-  <application stringID="NgdBuild" timeStamp="Wed Feb 12 14:45:35 2020">
+  <application stringID="NgdBuild" timeStamp="Thu Feb 13 12:25:24 2020">
     <section stringID="User_Env">
       <table stringID="User_EnvVar">
         <column stringID="variable"/>
@@ -33,7 +33,7 @@
         <column stringID="speed"/>
         <row stringID="row" value="0">
           <item stringID="arch" value="Intel(R) Celeron(R) CPU  N2840  @ 2.16GHz"/>
-          <item stringID="speed" value="989.104 MHz"/>
+          <item stringID="speed" value="2582.305 MHz"/>
         </row>
       </table>
     </section>
