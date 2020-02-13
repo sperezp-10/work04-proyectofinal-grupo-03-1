@@ -109,6 +109,6 @@ Como podemos apreciar en la anterior imagen, enfocandonos en la relacion de los 
 
 Con esto en mente, tenemos el siguiente cambio en el codigo de lectura de la camara:
 ![lectura1](./figs/cod_5.PNG)
-![lectura1](./figs/cod_5_1.PNG)
+![lectura1](./figs/cod_5_2.PNG)
 
 
